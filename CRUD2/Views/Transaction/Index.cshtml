@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CRUD2.Models.TransactionModel>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<h1 class="text-center"><i class="fas fa-comment-dollar text-success"></i>Transaction History</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountController)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeneficaryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+            <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",null,Context.Request.Scheme)','New Transaction')" class="btn btn-outline-success btn-sm"> <i class="fas fa-random"></i> New Transaction</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountController)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeneficaryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TransactionID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TransactionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
